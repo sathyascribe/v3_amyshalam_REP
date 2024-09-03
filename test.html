@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block content %}{{title}}{% endblock  %} | Amy Shalam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Header -->
+<header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <div class="text-blue-700 font-bold text-xl">uphome</div>
+    <nav class="space-x-4">
+        <a href="#" class="text-gray-700 hover:text-blue-700">About</a>
+        <a href="#" class="text-gray-700 hover:text-blue-700">Help</a>
+        <a href="#" class="text-gray-700 hover:text-blue-700">Blog</a>
+    </nav>
+    <div class="flex items-center space-x-4">
+        <button class="text-white bg-blue-700 rounded px-4 py-2">Search</button>
+        <div class="flex items-center space-x-2">
+            <span>Odama Studio</span>
+            <button class="text-white bg-orange-500 rounded-full w-8 h-8"></button>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="flex">
+    <!-- Filter Sidebar -->
+    <aside class="w-1/4 bg-white p-4 shadow-md">
+        <h2 class="text-lg font-semibold mb-4">Filter</h2>
+        <div class="mb-4">
+            <label class="block text-gray-700">Location</label>
+            <input type="text" class="w-full border rounded p-2" placeholder="Chicago">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Type of Place</label>
+            <div class="space-y-2">
+                <label><input type="checkbox" checked> All</label>
+                <label><input type="checkbox"> Building</label>
+                <label><input type="checkbox"> Apartment</label>
+                <label><input type="checkbox"> House</label>
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Price Range</label>
+            <input type="range" min="10" max="3500" class="w-full">
+            <div class="flex justify-between text-gray-600">
+                <span>$10</span>
+                <span>$1500</span>
+                <span>$3500</span>
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Size</label>
+            <div class="flex space-x-2">
+                <input type="text" class="border rounded p-2 w-1/2" placeholder="Min">
+                <input type="text" class="border rounded p-2 w-1/2" placeholder="Max">
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Features</label>
+            <div class="space-y-2">
+                <label><input type="checkbox"> AC & Heating</label>
+                <label><input type="checkbox"> Clubhouse</label>
+                <label><input type="checkbox"> Dishwasher</label>
+                <label><input type="checkbox"> Spa</label>
+            </div>
+        </div>
+        <div>
+            <label class="block text-gray-700">Style</label>
+            <div class="space-y-2">
+                <label><input type="checkbox"> A-Frame</label>
+                <label><input type="checkbox"> Dome</label>
+                <label><input type="checkbox"> Cottage</label>
+                <label><input type="checkbox"> Spanish</label>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Listings and Map -->
+    <main class="flex-1 p-4 flex">
+        <!-- Listings -->
+        <section class="w-1/2 pr-4">
+            <div class="bg-white p-4 rounded shadow-md mb-4">
+                <img src="https://via.placeholder.com/300x200" alt="Property 1" class="rounded mb-4">
+                <h3 class="font-semibold text-xl">19W Evergreen Ave</h3>
+                <p class="text-gray-500">Chicago - Illinois, US 60622</p>
+                <p class="text-blue-700 text-lg">$1,320/mo</p>
+                <p>3 bedroom, 2 bathroom, 700 sqft</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md">
+                <img src="https://via.placeholder.com/300x200" alt="Property 2" class="rounded mb-4">
+                <h3 class="font-semibold text-xl">2124W Crystal St</h3>
+                <p class="text-gray-500">Chicago - Illinois, US 60623</p>
+                <p class="text-blue-700 text-lg">$1,150/mo</p>
+                <p>2 bedroom, 2 bathroom, 750 sqft</p>
+            </div>
+        </section>
+        
+        <!-- Map -->
+        <section id="map" class="w-1/2 rounded shadow-md"></section>
+    </main>
+</div>
+
+<script>
+    var map = L.map('map').setView([41.8781, -87.6298], 13); // Chicago coordinates
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    // Adding markers to the map
+    L.marker([41.8781, -87.6298]).addTo(map)
+        .bindPopup('<b>19W Evergreen Ave</b><br>$1,320/mo').openPopup();
+    L.marker([41.8781, -87.6198]).addTo(map)
+        .bindPopup('<b>2124W Crystal St</b><br>$1,150/mo').openPopup();
+</script>
+
+</body>
+</html>

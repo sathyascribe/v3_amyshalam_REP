@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Add Property
+{% endblock  %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10">
+    <form method="POST" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ property_form }}
+        <input type="file" name="image" multiple class="w-2/3 focus:outline-none focus:ring focus:ring-gray-400 text-sm text-gray-700">
+        <button type="submit" class="btn rounded-lg px-6 py-6 bg-gray-600 text-white font-normal hover:bg-gray-900 hover:border-gray-100 hover:border-l">Save Property</button>
+    </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="inline-flex items-center">
+        <label class="relative flex cursor-pointer items-center rounded-full p-3" for="login" data-ripple-dark="true">
+          <input id="login" type="checkbox"
+            class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
+          />
+          <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1" >
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+        </label>
+        <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="login">
+          Remember Me
+        </label>
+      </div>
+</div>
+{% endblock  %}

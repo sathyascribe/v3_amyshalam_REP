@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{title}}{% endblock  %} | Amy Shalam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-100">
+    {% if user.is_authenticated %}
+    <!-- Header -->
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+            <div class="text-blue-700 font-bold text-xl">uphome</div>
+            <nav class="space-x-4">
+                <a href="{% url 'property:property_list' %}" class="text-gray-700 hover:text-blue-700">Explore</a>
+                <a href="#" class="text-gray-700 hover:text-blue-700">Dashboard</a>
+                <a href="{% url 'property:add_property' %}" class="text-gray-700 hover:text-blue-700">List New Property</a>
+            </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+                <span>{{request.user.first_name}}</span>
+                <a href="{% url 'accounts:logout' %}"><button class="text-white bg-orange-500 rounded-full w-8 h-8"></button></a>
+            </div>
+        </div>
+    </header>
+    {% endif %}
+    <div class="container mx-auto mt-6">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
