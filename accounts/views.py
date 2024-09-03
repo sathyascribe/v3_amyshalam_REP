@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 def login_page(request):
     form = LoginForm()
     message = ''
+    title = 'Login'
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -23,7 +24,7 @@ def login_page(request):
                 return redirect('accounts:index')
             else:
                 message = 'Login failed!'
-    return render(request, 'login.html', context={'form': form, 'message': message})
+    return render(request, 'login.html', context={'form': form, 'message': message, 'title': title})
 
 @login_required()
 def dashboard(request):
